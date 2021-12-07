@@ -20,6 +20,7 @@ metadata:
   labels:
     app.kubernetes.io/name: monitoring-stack-operator-sm
     app.kubernetes.io/part-of: monitoring-stack-operator
+    system: foo
 spec:
   selector:
     matchLabels:
