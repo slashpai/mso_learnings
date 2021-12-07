@@ -1,0 +1,29 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: monitoring-stack-operator
+  labels:
+    app.kubernetes.io/name: monitoring-stack-operator
+    app.kubernetes.io/part-of: monitoring-stack-operator
+spec:
+  selector:
+    app.kubernetes.io/name: monitoring-stack-operator
+  ports:
+  - name: metrics
+    port: 8080
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: monitoring-stack-operator-sm
+  labels:
+    app.kubernetes.io/name: monitoring-stack-operator-sm
+    app.kubernetes.io/part-of: monitoring-stack-operator
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: monitoring-stack-operator
+  endpoints:
+  - port: metrics
+---
